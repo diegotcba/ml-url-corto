@@ -87,9 +87,9 @@ function create(event, context, callback) {
 }
 
 function isMlDomain(hostname) {
-  for(domain in siteDomains) {
+  for(let index in siteDomains) {
 
-      if(hostname.indexOf(siteDomains[domain]) !== -1) {
+      if(hostname.indexOf(siteDomains[index]) !== -1) {
         return true;
       }    
   }
