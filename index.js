@@ -14,6 +14,8 @@ var routes = {
   '/create': create
 };
 
+var validDomains = ['mercadolibre','mercadolivre'];
+
 // Handler provides routing
 exports.handler = function(event, context, callback) {
   console.log(event);
@@ -46,6 +48,7 @@ function index(event, context, callback) {
 // Create a new teeny url
 function create(event, context, callback) {
   var json;
+  var checkUrl;
   if (!event.body) {
     return done(400, '{"error": "Missing body"}', 'application/json', callback);
   }
@@ -61,9 +64,15 @@ function create(event, context, callback) {
   }
 
   try {
-    const checkUrl = new URL(json.longUrl);
+    checkUrl = new URL(json.longUrl);
   } catch (e) {
     return done(400, '{"error": "Invalid url"}', 'application/json', callback);
+  }
+
+  console.log('url hostname: ', checkUrl.hostname);
+
+  if(!checkUrl.hostname.includes(validDomains[0])) {
+    return done(400, '{"error": "No ML url"}', 'application/json', callback);
   }
 
   shortSave(json.longUrl, function(err, data) {
