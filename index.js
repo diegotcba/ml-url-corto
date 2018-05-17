@@ -54,6 +54,11 @@ function create(event, context, callback) {
     return done(400, '{"error": "Invalid JSON body"}', 'application/json', callback);
   }
 
+  //check url format, no injection
+  if(json.longUrl === "") {
+    return done(400, '{"error": "Long URL empty"}', 'application/json', callback);
+  }
+
   shortSave(json.longUrl, function(err, data) {
     if (err) {
       return done(500, '{"error": "Internal Server Error"}', 'application/json', callback);

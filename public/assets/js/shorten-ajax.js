@@ -3,6 +3,7 @@ BASE_PATH = BASE_PATH || '/';
 
 function shorten() {
   var longUrl = document.getElementById('long-url').value;
+
   fetch(BASE_PATH + 'create', {
     method: 'POST',
     body: JSON.stringify({longUrl: longUrl})
