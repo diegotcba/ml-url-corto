@@ -87,12 +87,14 @@ function create(event, context, callback) {
 }
 
 function isMlDomain(hostname) {
-  siteDomains.forEach(function(domain, index){
-      if(hostname.includes(domain)) {
-        return true;
-      }
-  });
+  for(domain in siteDomains) {
 
+      if(hostname.indexOf(siteDomains[domain]) !== -1) {
+        return true;
+      }    
+  }
+
+  console.log('not valid hostname: ',hostname);
   return false;
 }
 
