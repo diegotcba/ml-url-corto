@@ -16,6 +16,8 @@ var routes = {
 
 var validDomains = ['mercadolibre','mercadolivre'];
 
+const siteDomains = ['mercadolibre.com', 'mercadolibre.com.ar','mercadolivre.br'];
+
 // Handler provides routing
 exports.handler = function(event, context, callback) {
   console.log(event);
@@ -60,7 +62,7 @@ function create(event, context, callback) {
 
   //check url format, no injection
   if(json.longUrl === "") {
-    return done(400, '{"error": "Long URL empty"}', 'application/json', callback);
+    return done(400, '{"error": "Long url empty"}', 'application/json', callback);
   }
 
   try {
@@ -71,8 +73,8 @@ function create(event, context, callback) {
 
   console.log('url hostname: ', checkUrl.hostname);
 
-  if(!checkUrl.hostname.includes(validDomains[0])) {
-    return done(400, '{"error": "No ML url"}', 'application/json', callback);
+  if(!isMlDomain(checkUrl.hostname)) {
+    return done(400, '{"error": "No an ML url"}', 'application/json', callback);
   }
 
   shortSave(json.longUrl, function(err, data) {
@@ -82,6 +84,16 @@ function create(event, context, callback) {
       return done(200, data.toString(), 'application/json', callback);
     }
   });
+}
+
+function isMlDomain(hostname) {
+  siteDomains.forEach(function(domain, index){
+      if(hostname.includes(domain)) {
+        return true;
+      }
+  });
+
+  return false;
 }
 
 // Try to load the long url and redirect, otherwise 404

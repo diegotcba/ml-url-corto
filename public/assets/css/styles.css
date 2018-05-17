@@ -175,6 +175,28 @@ footer .footer-contents {
   margin: 20px;
 }
 
+
+#copy-input {
+  position: absolute;
+  left: -10000px;
+}
+
+#btn-copy-url {
+  font-size: 1.5rem;
+  text-align: center;
+  vertical-align: middle;
+  border: 1px solid;
+  border-radius: 3px;
+  padding: 2px 8px 2px 8px;
+  color: #3498db;
+  background-color: #fff;
+}
+
+#btn-copy-url:hover {
+  background-color: #3498db;
+  color: #fff;
+}
+
 @keyframes dash {
   to {
     stroke-dashoffset: 0;

@@ -13,8 +13,27 @@ function shorten() {
     }
   }).then(function(json) {
     let teenyUrl = window.location.origin + BASE_PATH + json.shortKey;
-    document.getElementById('short-url').innerHTML = '<a href = "' + teenyUrl + '">' + teenyUrl + '</a>';
+
+    let linkShortUrl = '<a class="short-link" href= "' + teenyUrl + '">' + teenyUrl + '</a>';
+    let inputShortUrl = '<input id="copy-input" value="' + teenyUrl + '" tabindex="-1" readonly/>';
+    let copyShortUrl = '<a href="#" class="btn-copy-url" onclick="copyToClipboard()">Copiar</a>';
+
+    document.getElementById('short-url').innerHTML = linkShortUrl + inputShortUrl + copyShortUrl;
   }).catch(function(error) {
     document.getElementById('short-url').innerHTML = 'Error shortening: ' + error;
   });
 }
+
+
+
+function copyToClipboard(e) {
+  e.preventDefault();
+  e.stopPropagation()
+
+  var copyInput = document.getElementById('copy-input');
+
+  copyInput.select();
+
+  document.execCommand('copy');
+}
+//document.getElementsByClassName('btn-copy-url').addEventListener('click', copyToClipboard);
