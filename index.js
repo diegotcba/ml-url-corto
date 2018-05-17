@@ -6,7 +6,7 @@ const doc = new aws.DynamoDB.DocumentClient();
 const crypto = require('crypto');
 const fs = require('fs');
 const path = require('path');
-const { URL } = require('url');
+const url = require('url');
 
 // Map of routes to functions
 var routes = {
@@ -64,7 +64,7 @@ function create(event, context, callback) {
   }
 
   try {
-    checkUrl = new URL(json.longUrl);
+    checkUrl = url.parse(json.longUrl);
   } catch (e) {
     return done(400, '{"error": "Invalid url"}', 'application/json', callback);
   }
