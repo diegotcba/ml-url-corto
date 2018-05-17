@@ -6,6 +6,7 @@ const doc = new aws.DynamoDB.DocumentClient();
 const crypto = require('crypto');
 const fs = require('fs');
 const path = require('path');
+const { URL } = require('url');
 
 // Map of routes to functions
 var routes = {
@@ -57,6 +58,12 @@ function create(event, context, callback) {
   //check url format, no injection
   if(json.longUrl === "") {
     return done(400, '{"error": "Long URL empty"}', 'application/json', callback);
+  }
+
+  try {
+    const checkUrl = new URL(json.longUrl);
+  } catch (e) {
+    return done(400, '{"error": "Invalid url"}', 'application/json', callback);
   }
 
   shortSave(json.longUrl, function(err, data) {
