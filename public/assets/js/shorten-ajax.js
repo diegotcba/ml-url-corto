@@ -20,7 +20,7 @@ function shorten() {
 
     document.getElementById('short-url').innerHTML = linkShortUrl + inputShortUrl + copyShortUrl;
 
-    document.getElementsByClassName('btn-copy-url').addEventListener('click', copyToClipboard);
+    document.getElementsByClassName('btn-copy-url')[0].addEventListener('click', copyToClipboard);
   }).catch(function(error) {
     document.getElementById('short-url').innerHTML = 'Error shortening: ' + error;
   });
