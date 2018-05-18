@@ -168,7 +168,7 @@ footer .footer-contents {
   cursor: pointer;
 }
 
-#long-url { padding:8px; font-size:16px; border-width:2px; border-style:solid; border-radius:5px; border-color:#3498db;  } 
+#long-url { padding: 15px; font-size:16px; border-width:2px; border-style:solid; border-radius:5px; border-color:#3498db;  } 
 #long-url:focus { outline:none; } 
 
 #ml-logo {
@@ -207,12 +207,14 @@ footer .footer-contents {
   border-radius: 5px;
   margin-top: 10px;
   margin-bottom: 10px;
+  padding: 10px;
 }
 
 .long-link {
   color: #9b9b9b;
   text-overflow: ellipsis;
   width: 100%;
+  font-size: 1.5rem;
 }
 
 @keyframes dash {

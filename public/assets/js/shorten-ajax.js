@@ -8,8 +8,10 @@ function shorten() {
     method: 'POST',
     body: JSON.stringify({longUrl: longUrl})
   }).then(function(response) {
-    if (response.ok) {
+    if (response.ok && response.status == 200) {
       return response.json();
+    } else {
+      document.getElementById('short-url').innerHTML = 'Error shortening: ' + response.json.error;    
     }
   }).then(function(json) {
     let teenyUrl = window.location.origin + BASE_PATH + json.shortKey;
@@ -19,7 +21,7 @@ function shorten() {
     let inputShortUrl = '<input id="copy-input" value="' + teenyUrl + '" tabindex="-1" readonly/>';
     let copyShortUrl = '<a href="#" class="btn-copy-url">Copiar</a>';
 
-    document.getElementById('short-url').innerHTML =linkLongUrl + '<div>' + linkShortUrl + inputShortUrl + copyShortUrl + '</div>';
+    document.getElementById('short-url').innerHTML = linkLongUrl + '<div>' + linkShortUrl + inputShortUrl + copyShortUrl + '</div>';
 
     var btnCopy = document.getElementsByClassName('btn-copy-url');
 
