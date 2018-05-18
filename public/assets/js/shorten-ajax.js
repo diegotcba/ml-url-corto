@@ -4,22 +4,28 @@ BASE_PATH = BASE_PATH || '/';
 function shorten() {
   var longUrl = document.getElementById('long-url').value;
 
-  //const createEndpoint = BASE_PATH + 'create';
-  const createEndpoint = 'https://comprar-en.ml/create';
+  const createEndpoint = BASE_PATH + 'create';
+  //const createEndpoint = 'https://comprar-en.ml/create';
 
   fetch(createEndpoint, {
     method: 'POST',
     body: JSON.stringify({longUrl: longUrl})
   }).then(function(response) {
     if (response.ok) {
-      return response.json();
+      showShortUrl(response.json());
+    } else {
+      showApiError(response.json());
     }
-  }).then(function(json) {
-    if(!json) {
-      return;
-    }
+  }).catch(function(error) {
+    document.getElementById('short-url').innerHTML = 'Error shortening: ' + error;
+  });
+}
 
-    if(!json.error) {
+function showApiError(json) {
+      document.getElementById('short-url').innerHTML = 'Error shortening: ' + json.error;    
+}
+
+function showShortUrl(json) {
       let teenyUrl = window.location.origin + BASE_PATH + json.shortKey;
 
       let linkLongUrl = '<div><a class="long-link" href= "' + json.longUrl + '">' + json.longUrl + '</a></div>';
@@ -33,17 +39,8 @@ function shorten() {
 
       if(btnCopy.length > 0) {
         btnCopy[0].addEventListener('click', copyToClipboard);
-      }
-    } else {
-      document.getElementById('short-url').innerHTML = 'Error shortening: ' + json.error;    
-    }
-
-  }).catch(function(error) {
-    document.getElementById('short-url').innerHTML = 'Error shortening: ' + error;
-  });
+      }  
 }
-
-
 
 function copyToClipboard(e) {
   e.preventDefault();
