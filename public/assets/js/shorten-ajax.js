@@ -14,13 +14,19 @@ function shorten() {
   }).then(function(json) {
     let teenyUrl = window.location.origin + BASE_PATH + json.shortKey;
 
+    let linkLongUrl = '<a class="long-link" href= "' + json.longUrl + '">' + json.longUrl + '</a>';
     let linkShortUrl = '<a class="short-link" href= "' + teenyUrl + '">' + teenyUrl + '</a>';
     let inputShortUrl = '<input id="copy-input" value="' + teenyUrl + '" tabindex="-1" readonly/>';
     let copyShortUrl = '<a href="#" class="btn-copy-url">Copiar</a>';
 
-    document.getElementById('short-url').innerHTML = linkShortUrl + inputShortUrl + copyShortUrl;
+    document.getElementById('short-url').innerHTML = linkLongUrl + linkShortUrl + inputShortUrl + copyShortUrl;
 
-    document.getElementsByClassName('btn-copy-url')[0].addEventListener('click', copyToClipboard);
+    var btnCopy = document.getElementsByClassName('btn-copy-url');
+
+    if(btnCopy.length > 0) {
+      btnCopy[0].addEventListener('click', copyToClipboard);
+    }
+
   }).catch(function(error) {
     document.getElementById('short-url').innerHTML = 'Error shortening: ' + error;
   });
@@ -34,7 +40,9 @@ function copyToClipboard(e) {
 
   var copyInput = document.getElementById('copy-input');
 
-  copyInput.select();
+  if(copyInput) {
+    copyInput.select();
 
-  document.execCommand('copy');
+    document.execCommand('copy');
+  }
 }

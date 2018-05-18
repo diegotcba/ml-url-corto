@@ -166,7 +166,7 @@ function shortSave(longUrl, callback, keyHash = '', length = 2) {
       }
     } else {
       // Key saved: return success
-      return callback(null, JSON.stringify({shortKey: shortKey}));
+      return callback(null, JSON.stringify({shortKey: shortKey, longUrl: longUrl}));
     }
   });
 }

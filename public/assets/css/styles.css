@@ -203,7 +203,16 @@ footer .footer-contents {
 }
 
 #short-url {
-  
+  background-color: #fff;
+  border-radius: 5px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.long-link {
+  color: #9b9b9b;
+  text-overflow: ellipsis;
+  width: 100%;
 }
 
 @keyframes dash {
