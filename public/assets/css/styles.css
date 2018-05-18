@@ -181,7 +181,7 @@ footer .footer-contents {
   left: -10000px;
 }
 
-#btn-copy-url {
+.btn-copy-url {
   font-size: 1.5rem;
   text-align: center;
   vertical-align: middle;
@@ -190,11 +190,16 @@ footer .footer-contents {
   padding: 2px 8px 2px 8px;
   color: #3498db;
   background-color: #fff;
+  margin-left: 10px;
 }
 
-#btn-copy-url:hover {
+.btn-copy-url:hover {
   background-color: #3498db;
   color: #fff;
+}
+
+.short-link {
+  
 }
 
 @keyframes dash {

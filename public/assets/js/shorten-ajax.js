@@ -16,9 +16,11 @@ function shorten() {
 
     let linkShortUrl = '<a class="short-link" href= "' + teenyUrl + '">' + teenyUrl + '</a>';
     let inputShortUrl = '<input id="copy-input" value="' + teenyUrl + '" tabindex="-1" readonly/>';
-    let copyShortUrl = '<a href="#" class="btn-copy-url" onclick="copyToClipboard()">Copiar</a>';
+    let copyShortUrl = '<a href="#" class="btn-copy-url">Copiar</a>';
 
     document.getElementById('short-url').innerHTML = linkShortUrl + inputShortUrl + copyShortUrl;
+
+    document.getElementsByClassName('btn-copy-url').addEventListener('click', copyToClipboard);
   }).catch(function(error) {
     document.getElementById('short-url').innerHTML = 'Error shortening: ' + error;
   });
@@ -36,4 +38,3 @@ function copyToClipboard(e) {
 
   document.execCommand('copy');
 }
-//document.getElementsByClassName('btn-copy-url').addEventListener('click', copyToClipboard);
