@@ -4,7 +4,10 @@ BASE_PATH = BASE_PATH || '/';
 function shorten() {
   var longUrl = document.getElementById('long-url').value;
 
-  fetch(BASE_PATH + 'create', {
+  //const createEndpoint = BASE_PATH + 'create';
+  const createEndpoint = 'https://comprar-en.ml/create';
+
+  fetch(createEndpoint, {
     method: 'POST',
     body: JSON.stringify({longUrl: longUrl})
   }).then(function(response) {
@@ -12,6 +15,10 @@ function shorten() {
       return response.json();
     }
   }).then(function(json) {
+    if(!json) {
+      return;
+    }
+
     if(!json.error) {
       let teenyUrl = window.location.origin + BASE_PATH + json.shortKey;
 
