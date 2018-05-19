@@ -11,12 +11,15 @@ function shorten() {
     method: 'POST',
     body: JSON.stringify({longUrl: longUrl})
   }).then(function(response) {
-    if (response.ok) {
-      showShortUrl(response.json());
+    return response.json();
+  }).then(function(json){
+    if(json.error) {
+      showApiError(json);
     } else {
-      showApiError(response.json());
+      showShortUrl(json);
     }
-  }).catch(function(error) {
+  })
+  .catch(function(error) {
     document.getElementById('short-url').innerHTML = 'Error shortening: ' + error;
   });
 }
